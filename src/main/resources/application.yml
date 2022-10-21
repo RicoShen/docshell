@@ -1,0 +1,10 @@
+server:
+  servlet:
+    context-path: /docgen
+
+  port: 8088
+
+app:
+  name: ${project.name}
+  version: ${project.version}
+
