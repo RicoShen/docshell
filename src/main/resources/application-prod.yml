@@ -1,0 +1,5 @@
+youland:
+  service:
+    docsUrl: /gendocs
+    test:
+      test2: testvalue
