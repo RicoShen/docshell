@@ -1,5 +1,7 @@
 package com.youland.docshell;
 
+import com.youland.docshell.app.YoulandConfig;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +16,10 @@ import java.io.InputStreamReader;
  **/
 @RequestMapping("/convert")
 @RestController
+@RequiredArgsConstructor
 public class ConvertController {
+
+    private final YoulandConfig youlandConfig;
 
     Logger logger = LoggerFactory.getLogger(ConvertController.class);
 
@@ -22,7 +27,12 @@ public class ConvertController {
     public boolean wordToPdf(@PathVariable String fileName) {
         // TODO 支持多文件转换
         Runtime runtime = Runtime.getRuntime();
-        String command = "soffice --convert-to pdf --outdir /gendocs /gendocs/".concat(fileName);
+        StringBuffer sbCommand = new StringBuffer();
+        sbCommand.append("soffice --convert-to pdf --outdir ");
+        sbCommand.append(youlandConfig.getDocsUrl().concat(" "));
+        sbCommand.append(youlandConfig.getDocsUrl().concat(fileName));
+        String command = sbCommand.toString();
+        // String command = "soffice --convert-to pdf --outdir /gendocs /gendocs".concat(fileName);
         try {
             logger.info("convert {} to pdf, exec command: {}.", fileName, command);
             Process pro = runtime.exec(command);
@@ -48,7 +58,12 @@ public class ConvertController {
     public boolean wordToHtml(@PathVariable String fileName) {
         // TODO 支持多文件转换
         Runtime runtime = Runtime.getRuntime();
-        String command = "soffice --convert-to \"html:XHTML Writer File:UTF8\" --outdir /gendocs /gendocs/".concat(fileName);
+        StringBuffer sbCommand = new StringBuffer();
+        sbCommand.append("soffice --convert-to \"html:XHTML Writer File:UTF8\" --outdir ");
+        sbCommand.append(youlandConfig.getDocsUrl().concat(" "));
+        sbCommand.append(youlandConfig.getDocsUrl().concat(fileName));
+        String command = sbCommand.toString();
+        // String command = "soffice --convert-to \"html:XHTML Writer File:UTF8\" --outdir /gendocs /gendocs/".concat(fileName);
         try {
             logger.info("convert {} to html, exec command: {}.", fileName, command);
             Process pro = runtime.exec(command);
