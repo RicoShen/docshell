@@ -30,7 +30,7 @@ public class ConvertController {
         StringBuffer sbCommand = new StringBuffer();
         sbCommand.append("soffice --convert-to pdf --outdir ");
         sbCommand.append(youlandConfig.getDocsUrl().concat(" "));
-        sbCommand.append(youlandConfig.getDocsUrl().concat(fileName));
+        sbCommand.append(youlandConfig.getDocsUrl().concat("/").concat(fileName));
         String command = sbCommand.toString();
         // String command = "soffice --convert-to pdf --outdir /gendocs /gendocs".concat(fileName);
         try {
@@ -61,7 +61,7 @@ public class ConvertController {
         StringBuffer sbCommand = new StringBuffer();
         sbCommand.append("soffice --convert-to \"html:XHTML Writer File:UTF8\" --outdir ");
         sbCommand.append(youlandConfig.getDocsUrl().concat(" "));
-        sbCommand.append(youlandConfig.getDocsUrl().concat(fileName));
+        sbCommand.append(youlandConfig.getDocsUrl().concat("/").concat(fileName));
         String command = sbCommand.toString();
         // String command = "soffice --convert-to \"html:XHTML Writer File:UTF8\" --outdir /gendocs /gendocs/".concat(fileName);
         try {

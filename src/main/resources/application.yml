@@ -10,10 +10,15 @@ app:
 
 spring:
   profiles:
-    active: prod
+    active: dev
   main:
     allow-bean-definition-overriding: true
   servlet:
     multipart:
       max-file-size: 10MB
       max-request-size: 50MB
+
+cloud:
+  aws:
+    region:
+      static: us-west-1
